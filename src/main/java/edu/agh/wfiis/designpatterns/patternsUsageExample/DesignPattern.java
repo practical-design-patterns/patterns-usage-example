@@ -6,6 +6,8 @@ class DesignPattern {
 
     private String name;
 
+    private String patternCode;
+
     private String description;
 
     private String example;
@@ -72,19 +74,27 @@ class DesignPattern {
         this.behavioral = behavioral;
     }
 
+    public String getPatternCode() {
+        return patternCode;
+    }
 
-    public DesignPattern(String id, String name, String description, String example, boolean creational, boolean structural, boolean behavioral) {
+    public void setPatternCode(String patternCode) {
+        this.patternCode = patternCode;
+    }
+
+    public DesignPattern(String id, String name, String description, String example, String patternCode, boolean creational, boolean structural, boolean behavioral) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.example = example;
+        this.patternCode = patternCode;
         this.creational = creational;
         this.structural = structural;
         this.behavioral = behavioral;
     }
 
     public String refactor(String badCode){
-        /* some magic happens here, irrelevant from this example perspective...*/
+        /* some magic involving patternCode happens here, irrelevant from this example perspective...*/
 
         String goodCode = "this code is very good";
         return goodCode;

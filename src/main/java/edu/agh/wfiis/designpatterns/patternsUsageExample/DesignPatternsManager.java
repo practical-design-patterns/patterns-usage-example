@@ -26,6 +26,10 @@ public class DesignPatternsManager {
         }
     }
 
+    public String provideUsageExample(DesignPattern pattern){
+        String example = pattern instanceof UndefinedPattern? null: pattern.getExample();
+        return example;
+    }
 
     public String refactorCode(DesignPattern pattern, String badCode){
         String goodCode = pattern instanceof UndefinedPattern? null: pattern.refactor(badCode);
