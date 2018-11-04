@@ -1,47 +1,53 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample;
 
+import java.util.*;
+import java.io.*;
 
-import java.io.File;
+public class DesignPatternsManager implements Serializable {
 
-public class DesignPatternsManager {
 
-    public DesignPattern create(PatternName patternName) {
-        switch (patternName) {
-            case BUILDER: {
-                DesignPattern pattern = new DesignPattern("1","builder","builder pattern",null, true, false, false);
-                return pattern;
-            }
-            case DECORATOR: {
-                DesignPattern pattern = new DesignPattern("2","decorator","decorator pattern",null, true, false, false);
-                return pattern;
-            }
-            case STRATEGY: {
-                DesignPattern pattern = new DesignPattern("3","strategy","strategy pattern",null, false, false, true);
-                return pattern;
-            }
-            default: {
-                DesignPattern pattern = new UndefinedPattern();
-                return pattern;
-            }
+    private static volatile DesignPatternsManager instance;
+    private Map<String, DesignPattern> patterns = new HashMap<String, DesignPattern>();
+
+    public DesignPattern create(String patternName) {
+         return patterns.get(patternName);
+    }
+
+    public static DesignPatternsManager getInstance() {
+        if (instance == null) {
+            instance = new DesignPatternsManager();
         }
+        return instance;
+    }
+
+    private DesignPatternsManager() {
+        if (instance != null) {
+            throw new IllegalStateException("Cannot create new instance, please use getInstance method instead.");
+        }
+        patterns.put("BUILDER", DesignPattern.builder("1", "builder").withDescription("builder pattern").withExample(null).withPatternCode(null).build());
+        patterns.put("DECORATOR", DesignPattern.builder("2", "decorator").withDescription("decorator pattern").withExample(null).withPatternCode(null).build());
+        patterns.put("STRATEGY", DesignPattern.builder("3", "strategy").withDescription("strategy pattern").withExample(null).withPatternCode(null).build());
+    }
+
+    @Override
+    public DesignPatternsManager clone() throws CloneNotSupportedException {
+        return getInstance();
     }
 
     public String provideUsageExample(DesignPattern pattern){
-        String example = pattern instanceof UndefinedPattern? null: pattern.getExample();
-        return example;
+        return pattern.getExample();
     }
 
     public String refactorCode(DesignPattern pattern, String badCode){
-        String goodCode = pattern instanceof UndefinedPattern? null: pattern.refactor(badCode);
-        return goodCode;
+        return pattern.refactor(badCode);
     }
 
-    public String listPatterns(){
-        return PatternName.values().toString();
+    public String[] listPatterns(){
+        return patterns.keySet().toArray(new String[patterns.size()]);
     }
 
     public boolean areSameType(DesignPattern pattern1, DesignPattern pattern2){
-        return pattern1.isBehavioral() == pattern2.isBehavioral() && pattern1.isCreational() == pattern2.isCreational() && pattern1.isStructural() == pattern2.isStructural();
+        return pattern1.getPatternType() == pattern2.getPatternType();
     }
 
     public String extractBadCodeFromFile(File file){
@@ -59,21 +65,9 @@ public class DesignPatternsManager {
         return "very difficult coursework";
     }
 
-}
-
-enum PatternName {
-    BUILDER, DECORATOR, STRATEGY;
-}
-
-
-class UndefinedPattern extends DesignPattern {
-
-    public UndefinedPattern() {
-        super(null,null,null, null,false, false, false);
+    private Object readResolve() throws ObjectStreamException {
+        return getInstance();
     }
 
-    public String refactor(String badCode){
-        throw new UnsupportedOperationException();
-    }
 
 }
