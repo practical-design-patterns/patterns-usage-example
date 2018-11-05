@@ -1,6 +1,8 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample.design_patterns;
 
 public class DecoratorDesignPattern extends DesignPattern {
+    DecoratorDesignPattern(){}
+
     @Override
     public String getName() {
         return "Decorator";

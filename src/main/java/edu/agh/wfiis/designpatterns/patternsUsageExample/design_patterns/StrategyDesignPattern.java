@@ -1,6 +1,8 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample.design_patterns;
 
 public class StrategyDesignPattern extends DesignPattern {
+    StrategyDesignPattern(){}
+
     @Override
     public String getName() {
         return "Strategy";

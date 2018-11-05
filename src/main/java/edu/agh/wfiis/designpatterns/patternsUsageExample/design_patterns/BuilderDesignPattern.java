@@ -1,6 +1,8 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample.design_patterns;
 
 public class BuilderDesignPattern extends DesignPattern {
+    BuilderDesignPattern(){}
+
     @Override
     public String getName() {
         return "Builder";
