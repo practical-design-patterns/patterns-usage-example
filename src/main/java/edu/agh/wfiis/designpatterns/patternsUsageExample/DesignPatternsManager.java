@@ -8,15 +8,15 @@ public class DesignPatternsManager {
     public DesignPattern create(PatternName patternName) {
         switch (patternName) {
             case BUILDER: {
-                DesignPattern pattern = new DesignPattern("1","builder","builder pattern",null, true, false, false);
+                DesignPattern pattern = new DesignPattern("1","builder","builder pattern",null, null, true, false, false);
                 return pattern;
             }
             case DECORATOR: {
-                DesignPattern pattern = new DesignPattern("2","decorator","decorator pattern",null, true, false, false);
+                DesignPattern pattern = new DesignPattern("2","decorator","decorator pattern",null, null, true, false, false);
                 return pattern;
             }
             case STRATEGY: {
-                DesignPattern pattern = new DesignPattern("3","strategy","strategy pattern",null, false, false, true);
+                DesignPattern pattern = new DesignPattern("3","strategy","strategy pattern",null,null, false, false, true);
                 return pattern;
             }
             default: {
@@ -69,7 +69,7 @@ enum PatternName {
 class UndefinedPattern extends DesignPattern {
 
     public UndefinedPattern() {
-        super(null,null,null, null,false, false, false);
+        super(null,null,null,null, null,false, false, false);
     }
 
     public String refactor(String badCode){
