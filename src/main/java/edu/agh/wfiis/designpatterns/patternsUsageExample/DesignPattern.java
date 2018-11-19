@@ -1,96 +1,18 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample;
 
-class DesignPattern {
+import org.springframework.stereotype.Component;
 
-    private String id;
-
-    private String name;
+public class DesignPattern {
+    private Details patternDetails;
 
     private String patternCode;
 
-    private String description;
-
-    private String example;
-
-    private boolean creational;
-
-    private boolean structural;
-
-    private boolean behavioral;
-
-    public String getId() {
-        return id;
+    public static DesignPattern create(CreatingDesignPattern creator) {
+        return creator.create();
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getExample() {
-        return example;
-    }
-
-    public void setExample(String example) {
-        this.example = example;
-    }
-
-    public boolean isCreational() {
-        return creational;
-    }
-
-    public void setCreational(boolean creational) {
-        this.creational = creational;
-    }
-
-    public boolean isStructural() {
-        return structural;
-    }
-
-    public void setStructural(boolean structural) {
-        this.structural = structural;
-    }
-
-    public boolean isBehavioral() {
-        return behavioral;
-    }
-
-    public void setBehavioral(boolean behavioral) {
-        this.behavioral = behavioral;
-    }
-
-    public String getPatternCode() {
-        return patternCode;
-    }
-
-    public void setPatternCode(String patternCode) {
-        this.patternCode = patternCode;
-    }
-
-    public DesignPattern(String id, String name, String description, String example, String patternCode, boolean creational, boolean structural, boolean behavioral) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.example = example;
-        this.patternCode = patternCode;
-        this.creational = creational;
-        this.structural = structural;
-        this.behavioral = behavioral;
+    public Details getPatternDetails() {
+        return patternDetails;
     }
 
     public String refactor(String badCode){
@@ -98,5 +20,98 @@ class DesignPattern {
 
         String goodCode = "this code is very good";
         return goodCode;
+    }
+
+    private DesignPattern(Details patternDetails, String patternCode) {
+        this.patternDetails = patternDetails;
+        this.patternCode = patternCode;
+    }
+
+    @Component
+    public static class Builder implements CreatingDesignPattern, HavingName {
+        @Override
+        public DesignPattern create() {
+            return new DesignPattern(
+                    new Details("1", name(), "builder pattern", "some builder example", Type.CREATIONAL),
+                    "some builder code"
+            );
+        }
+
+        @Override
+        public String name() {
+            return "builder";
+        }
+    }
+
+    @Component
+    public static class Decorator implements CreatingDesignPattern, HavingName {
+        @Override
+        public DesignPattern create() {
+            return new DesignPattern(
+                    new Details("2", name(), "decorator pattern", "some decorator example", Type.CREATIONAL),
+                    "some decorator code"
+            );
+        }
+
+        @Override
+        public String name() {
+            return "decorator";
+        }
+    }
+
+    @Component
+    public static class Strategy implements CreatingDesignPattern, HavingName {
+        @Override
+        public DesignPattern create() {
+            return new DesignPattern(
+                    new Details("3", name(), "strategy pattern", "some strategy example", Type.BEHAVIORAL),
+                    "some strategy code"
+            );
+        }
+
+        @Override
+        public String name() {
+            return "strategy";
+        }
+    }
+
+    private enum Type {
+        CREATIONAL, STRUCTURAL, BEHAVIORAL
+    }
+
+     static class Details {
+        private String id;
+        private String name;
+        private String description;
+        private String example;
+        private Type patternType;
+
+        private Details(String id, String name, String description, String example, DesignPattern.Type patternType) {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.example = example;
+            this.patternType = patternType;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getExample() {
+            return example;
+        }
+
+        public Type getPatternType() {
+            return patternType;
+        }
     }
 }
