@@ -1,6 +1,5 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample;
 
-
 import java.io.File;
 
 public class DesignPatternsManager {
@@ -8,15 +7,36 @@ public class DesignPatternsManager {
     public DesignPattern create(PatternName patternName) {
         switch (patternName) {
             case BUILDER: {
-                DesignPattern pattern = new DesignPattern("1","builder","builder pattern",null, true, false, false);
+                DesignPattern pattern = DesignPattern.builder()
+                        .withId("1")
+                        .withName("builder")
+                        .withDescription("builder pattern")
+                        .withExample(null)
+                        .withPatternCode(null)
+                        .withDesignPatternType(DesignPatternType.CREATIONAL)
+                        .build();
                 return pattern;
             }
             case DECORATOR: {
-                DesignPattern pattern = new DesignPattern("2","decorator","decorator pattern",null, true, false, false);
+                DesignPattern pattern = DesignPattern.builder()
+                        .withId("2")
+                        .withName("decorator")
+                        .withDescription("decorator pattern")
+                        .withExample(null)
+                        .withPatternCode(null)
+                        .withDesignPatternType(DesignPatternType.CREATIONAL)
+                        .build();
                 return pattern;
             }
             case STRATEGY: {
-                DesignPattern pattern = new DesignPattern("3","strategy","strategy pattern",null, false, false, true);
+                DesignPattern pattern = DesignPattern.builder()
+                        .withId("3")
+                        .withName("strategy")
+                        .withDescription("strategy pattern")
+                        .withExample(null)
+                        .withPatternCode(null)
+                        .withDesignPatternType(DesignPatternType.BEHAVIORAL)
+                        .build();
                 return pattern;
             }
             default: {
@@ -41,7 +61,7 @@ public class DesignPatternsManager {
     }
 
     public boolean areSameType(DesignPattern pattern1, DesignPattern pattern2){
-        return pattern1.isBehavioral() == pattern2.isBehavioral() && pattern1.isCreational() == pattern2.isCreational() && pattern1.isStructural() == pattern2.isStructural();
+        return pattern1.getDesignPatternType().equals(pattern2.getDesignPatternType());
     }
 
     public String extractBadCodeFromFile(File file){
@@ -62,7 +82,7 @@ public class DesignPatternsManager {
 }
 
 enum PatternName {
-    BUILDER, DECORATOR, STRATEGY;
+    BUILDER, DECORATOR, STRATEGY
 }
 
 

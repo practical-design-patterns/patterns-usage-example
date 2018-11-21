@@ -49,7 +49,7 @@ class DesignPattern {
         return goodCode;
     }
 
-    public Builder build() {
+    public static Builder builder() {
         return new Builder();
     }
 
