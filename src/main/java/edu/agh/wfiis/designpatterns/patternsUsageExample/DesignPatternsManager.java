@@ -89,7 +89,7 @@ enum PatternName {
 class UndefinedPattern extends DesignPattern {
 
     public UndefinedPattern() {
-        super(null,null,null, null,false, false, false);
+        super();
     }
 
     public String refactor(String badCode){

@@ -33,6 +33,10 @@ class DesignPattern {
         return patternCode;
     }
 
+    protected DesignPattern() {
+
+    }
+
     private DesignPattern(String id, String name, String description, String example, String patternCode, DesignPatternType designPatternType) {
         this.id = id;
         this.name = name;
