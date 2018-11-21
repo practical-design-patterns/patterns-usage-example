@@ -3,94 +3,47 @@ package edu.agh.wfiis.designpatterns.patternsUsageExample;
 class DesignPattern {
 
     private String id;
-
     private String name;
-
-    private String patternCode;
-
     private String description;
-
     private String example;
-
-    private boolean creational;
-
-    private boolean structural;
-
-    private boolean behavioral;
+    private String patternCode;
+    private DesignPatternType designPatternType;
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getExample() {
         return example;
     }
 
-    public void setExample(String example) {
-        this.example = example;
-    }
-
-    public boolean isCreational() {
-        return creational;
-    }
-
-    public void setCreational(boolean creational) {
-        this.creational = creational;
-    }
-
-    public boolean isStructural() {
-        return structural;
-    }
-
-    public void setStructural(boolean structural) {
-        this.structural = structural;
-    }
-
-    public boolean isBehavioral() {
-        return behavioral;
-    }
-
-    public void setBehavioral(boolean behavioral) {
-        this.behavioral = behavioral;
+    public DesignPatternType getDesignPatternType() {
+        return designPatternType;
     }
 
     public String getPatternCode() {
         return patternCode;
     }
 
-    public void setPatternCode(String patternCode) {
-        this.patternCode = patternCode;
+    protected DesignPattern() {
+
     }
 
-    public DesignPattern(String id, String name, String description, String example, String patternCode, boolean creational, boolean structural, boolean behavioral) {
+    private DesignPattern(String id, String name, String description, String example, String patternCode, DesignPatternType designPatternType) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.example = example;
         this.patternCode = patternCode;
-        this.creational = creational;
-        this.structural = structural;
-        this.behavioral = behavioral;
+        this.designPatternType = designPatternType;
     }
 
     public String refactor(String badCode){
@@ -98,5 +51,70 @@ class DesignPattern {
 
         String goodCode = "this code is very good";
         return goodCode;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        private String id;
+        private String name;
+        private String description;
+        private String example;
+        private String patternCode;
+        private DesignPatternType designPatternType;
+
+        public Builder from(DesignPattern designPattern) {
+             this.id = designPattern.getId();
+             this.name = designPattern.getName();
+             this.description = designPattern.getDescription();
+             this.example = designPattern.getExample();
+             this.patternCode = designPattern.getPatternCode();
+             this.designPatternType = designPattern.getDesignPatternType();
+
+             return this;
+        }
+
+        public Builder withId(String id) {
+            this.id = id;
+
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+
+            return this;
+        }
+
+        public Builder withDescription(String description) {
+            this.description = description;
+
+            return this;
+        }
+
+        public Builder withExample(String example) {
+            this.example = example;
+
+            return this;
+        }
+
+        public Builder withPatternCode(String patternCode) {
+            this.patternCode = patternCode;
+
+            return this;
+        }
+
+        public Builder withDesignPatternType(DesignPatternType designPatternType) {
+            this.designPatternType = designPatternType;
+
+            return this;
+        }
+
+        public DesignPattern build() {
+            return new DesignPattern(id, name, description, example, patternCode, designPatternType);
+        }
     }
 }
