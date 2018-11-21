@@ -6,14 +6,8 @@ import java.io.File;
 
 public class FileExtractor implements Extractable {
 
-    private File file;
-
-    public void loadFile(File file){
-        this.file = file;
-    }
-
     @Override
-    public String extractBadCode(){
+    public String extractBadCode(Object object){
         /* some magic happens here, irrelevant from this example perspective...*/
         return "bad code from file";
     }

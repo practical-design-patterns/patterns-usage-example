@@ -1,8 +1,14 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample;
 
+import edu.agh.wfiis.designpatterns.patternsUsageExample.extractor.ClassPathExtractor;
+import edu.agh.wfiis.designpatterns.patternsUsageExample.extractor.Extractable;
+import edu.agh.wfiis.designpatterns.patternsUsageExample.extractor.FileExtractor;
+
 import java.io.File;
 
 public class DesignPatternsManager {
+
+    private Extractable fileExtractor, classPathExtractor;
 
     public DesignPattern create(PatternName patternName) {
         switch (patternName) {
@@ -65,13 +71,13 @@ public class DesignPatternsManager {
     }
 
     public String extractBadCodeFromFile(File file){
-        /* some magic happens here, irrelevant from this example perspective...*/
-        return "bad code from file";
+        fileExtractor = new FileExtractor();
+        return fileExtractor.extractBadCode(file);
     }
 
     public String extractBadCodeFromClassPath(ClassLoader classLoader){
-        /* some magic happens here, irrelevant from this example perspective...*/
-        return "bad code from class loader";
+        classPathExtractor = new ClassPathExtractor();
+        return classPathExtractor.extractBadCode(classLoader);
     }
 
     public String generateDesignPatternsCourseworkForStudents(){
