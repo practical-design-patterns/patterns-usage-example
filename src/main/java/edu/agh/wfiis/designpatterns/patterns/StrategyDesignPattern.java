@@ -3,7 +3,7 @@ package edu.agh.wfiis.designpatterns.patterns;
 import edu.agh.wfiis.designpatterns.CreatableDesignPattern;
 import edu.agh.wfiis.designpatterns.enums.DesignPatternType;
 
-public class StrategyDesignPattern implements CreatableDesignPattern {
+public class StrategyDesignPattern extends DesignPattern implements CreatableDesignPattern {
 
     @Override
     public DesignPattern create() {

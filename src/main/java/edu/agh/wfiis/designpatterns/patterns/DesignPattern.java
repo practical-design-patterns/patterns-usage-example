@@ -11,6 +11,17 @@ public class DesignPattern {
     private String patternCode;
     private DesignPatternType designPatternType;
 
+    public DesignPattern() {}
+
+    private DesignPattern(String id, String name, String description, String example, String patternCode, DesignPatternType designPatternType) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.example = example;
+        this.patternCode = patternCode;
+        this.designPatternType = designPatternType;
+    }
+
     public String getId() {
         return id;
     }
@@ -33,15 +44,6 @@ public class DesignPattern {
 
     public String getPatternCode() {
         return patternCode;
-    }
-
-    private DesignPattern(String id, String name, String description, String example, String patternCode, DesignPatternType designPatternType) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.example = example;
-        this.patternCode = patternCode;
-        this.designPatternType = designPatternType;
     }
 
     public String refactor(String badCode){
