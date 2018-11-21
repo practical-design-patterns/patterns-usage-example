@@ -4,5 +4,5 @@ import edu.agh.wfiis.designpatterns.patterns.DesignPattern;
 
 public interface CreatableDesignPattern {
 
-    DesignPattern create(CreatableDesignPattern designPattern);
+    DesignPattern create();
 }

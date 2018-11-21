@@ -6,7 +6,7 @@ import edu.agh.wfiis.designpatterns.enums.DesignPatternType;
 public class StrategyDesignPattern implements CreatableDesignPattern {
 
     @Override
-    public DesignPattern create(CreatableDesignPattern designPattern) {
+    public DesignPattern create() {
         return DesignPattern.builder()
                 .withId("3")
                 .withName("strategy")
