@@ -1,4 +1,4 @@
-package edu.agh.wfiis.designpatterns.patternsUsageExample.extractor;
+package edu.agh.wfiis.designpatterns.extractor;
 
 public class ClassPathExtractor implements Extractable {
 

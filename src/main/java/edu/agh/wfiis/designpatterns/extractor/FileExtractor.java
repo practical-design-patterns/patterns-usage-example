@@ -1,8 +1,4 @@
-package edu.agh.wfiis.designpatterns.patternsUsageExample.extractor;
-
-import edu.agh.wfiis.designpatterns.patternsUsageExample.extractor.Extractable;
-
-import java.io.File;
+package edu.agh.wfiis.designpatterns.extractor;
 
 public class FileExtractor implements Extractable {
 

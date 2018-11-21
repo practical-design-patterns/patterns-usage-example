@@ -1,6 +1,8 @@
-package edu.agh.wfiis.designpatterns.patternsUsageExample;
+package edu.agh.wfiis.designpatterns.patterns;
 
-class DesignPattern {
+import edu.agh.wfiis.designpatterns.enums.DesignPatternType;
+
+public class DesignPattern {
 
     private String id;
     private String name;
@@ -31,10 +33,6 @@ class DesignPattern {
 
     public String getPatternCode() {
         return patternCode;
-    }
-
-    protected DesignPattern() {
-
     }
 
     private DesignPattern(String id, String name, String description, String example, String patternCode, DesignPatternType designPatternType) {
@@ -117,4 +115,5 @@ class DesignPattern {
             return new DesignPattern(id, name, description, example, patternCode, designPatternType);
         }
     }
+
 }
