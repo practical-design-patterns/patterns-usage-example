@@ -1,47 +1,31 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.File;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+@Service
 public class DesignPatternsManager {
+    private final Set<HavingName> patternNames;
 
-    public DesignPattern create(PatternName patternName) {
-        switch (patternName) {
-            case BUILDER: {
-                DesignPattern pattern = new DesignPattern("1","builder","builder pattern",null, true, false, false);
-                return pattern;
-            }
-            case DECORATOR: {
-                DesignPattern pattern = new DesignPattern("2","decorator","decorator pattern",null, true, false, false);
-                return pattern;
-            }
-            case STRATEGY: {
-                DesignPattern pattern = new DesignPattern("3","strategy","strategy pattern",null, false, false, true);
-                return pattern;
-            }
-            default: {
-                DesignPattern pattern = new UndefinedPattern();
-                return pattern;
-            }
-        }
+    @Autowired
+    public DesignPatternsManager(Set<HavingName> patternNames) {
+        this.patternNames = patternNames;
     }
 
-    public String provideUsageExample(DesignPattern pattern){
-        String example = pattern instanceof UndefinedPattern? null: pattern.getExample();
-        return example;
-    }
-
-    public String refactorCode(DesignPattern pattern, String badCode){
-        String goodCode = pattern instanceof UndefinedPattern? null: pattern.refactor(badCode);
-        return goodCode;
+    public PatternHandler using(DesignPattern designPattern) {
+        return new PatternHandler(designPattern);
     }
 
     public String listPatterns(){
-        return PatternName.values().toString();
-    }
-
-    public boolean areSameType(DesignPattern pattern1, DesignPattern pattern2){
-        return pattern1.isBehavioral() == pattern2.isBehavioral() && pattern1.isCreational() == pattern2.isCreational() && pattern1.isStructural() == pattern2.isStructural();
+        return patternNames.stream()
+                           .map(HavingName::name)
+                           .collect(Collectors.joining("\n"));
     }
 
     public String extractBadCodeFromFile(File file){
@@ -59,21 +43,24 @@ public class DesignPatternsManager {
         return "very difficult coursework";
     }
 
-}
+    static class PatternHandler {
+        private DesignPattern designPattern;
 
-enum PatternName {
-    BUILDER, DECORATOR, STRATEGY;
-}
+        public String provideUsageExample(){
+            return designPattern.getPatternDetails().getExample();
+        }
 
+        public String refactorCode(String badCode){
+            return designPattern.refactor(badCode);
+        }
 
-class UndefinedPattern extends DesignPattern {
+        public boolean checkIfSameType(DesignPattern otherPattern){
+            return Objects.equals(designPattern.getPatternDetails().getPatternType(), otherPattern.getPatternDetails().getPatternType());
+        }
 
-    public UndefinedPattern() {
-        super(null,null,null, null,false, false, false);
+        private PatternHandler(DesignPattern designPattern) {
+            this.designPattern = designPattern;
+        }
     }
-
-    public String refactor(String badCode){
-        throw new UnsupportedOperationException();
-    }
-
 }
+
